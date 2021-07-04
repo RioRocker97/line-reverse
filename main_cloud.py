@@ -1,7 +1,7 @@
-from flask import Flask,Response,request
+from flask import Response
 from google.cloud import storage,vision
-import json,urllib3,os,random_word,time,base64
-app = Flask(__name__)
+import json,urllib3,os,time,base64
+#------Support--------
 HTTP = urllib3.PoolManager()
 COMMON_HEADER = {
     'Authorization': 'Bearer '+ os.environ['LINE_TOKEN']
@@ -49,7 +49,6 @@ def get_webhook_point():
         raise Exception("ERROR at Get Webhook Point")
 def push_reply(user,flex_body):
     this_header = COMMON_HEADER
-    #this_header['Authorization'] = 'Bearer '+ os.environ['LINE_TOKEN']
     this_header['Content-Type'] = 'application/json'
     data = json.dumps({
         "to":user,
@@ -97,9 +96,10 @@ def text_reply(reply_token,msg="Another One Webhook"):
     else :
         print(rep.data)
         print('Reply ERROR')
+#------Support--------
 
-@app.route('/', methods=['POST'])
-def respond():
+
+def webhook(request):
     line_events = request.json['events']
     for event in line_events:
         if event['type']=='message':
@@ -118,11 +118,4 @@ def respond():
                 t0 = time.time()
                 img_reply(img_id,user_id)
                 print("Time used : %.2f" % (time.time()-t0))
-
     return Response(status=200)
-@app.route('/',methods=['GET'])
-def index():
-    return "Webhook for line-reverse"
-
-if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0',port=80)
