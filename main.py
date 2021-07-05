@@ -14,7 +14,7 @@ def construct_flex_msg(img_url,guess_label):
         flex = json.load(json_file)
         json_file.close()
         flex['body']['contents'][0]['url'] = str(img_url)
-        flex['body']['contents'][2]['contents'][0]['contents'][0]['contents'][0]['text'] = str(guess_label)
+        flex['body']['contents'][2]['contents'][0]['contents'][1]['contents'][0]['text'] = str(guess_label)
         return flex
     except:
         print('ERROR loading FLEX-JSON')
