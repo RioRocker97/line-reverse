@@ -25,8 +25,12 @@ def reverse_search(img_byte):
     context = vision.ImageContext(web_detection_params=req_param)
 
     response = search.web_detection(image=img, image_context=context)
-    print(str(response.web_detection.best_guess_labels[0]).split('\n')[0].split('"')[1])
-    return str(response.web_detection.best_guess_labels[0]).split('\n')[0].split('"')[1]
+    try:
+        print(str(response.web_detection.best_guess_labels[0]).split('\n')[0].split('"')[1])
+        return str(response.web_detection.best_guess_labels[0]).split('\n')[0].split('"')[1]
+    except:
+        print("reverse search ERROR. sending None")
+        return "NOT FOUND"
 def upload_img(img_id,data):
     storage_client = storage.Client()
     bucket = storage_client.bucket(GCP_BUCKET)

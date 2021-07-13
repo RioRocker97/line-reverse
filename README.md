@@ -1,11 +1,11 @@
-# LINE-Detect
+# LINE-Detect ###DONE###
 an reverse image search on Line official account Interface
 
 ## Why ?
 Bacause Why not ?(again)
 
 ## How does it work ?
-Using On-Cloud Bot-server (GCP's Cloud Function) to call vision-API for web detection
+Using On-Cloud Bot-server (with GCP's Cloud Function) integreated with Cloud vision API to do web detection .
 
 ## Developer's note
   -  still in early state so... don't expect everything to be pretty
